@@ -1,0 +1,30 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<div class="form-container">
+    <h1 class="form-title">Log in to ViWallet</h1>
+    <div>
+        <form action="/user/login" method="post">
+            <div class="mb-3">
+                <label for="input-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="input-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="input-password">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me">
+                <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Log in</button>
+            <a href="/user/register" class="btn btn-link">Register</a>
+        </form>
+    </div>
+</div>
+
+{{end}}
+
+{{define "js"}}
+{{end}}

@@ -1,0 +1,30 @@
+{{template "base" .}}
+
+{{define "content"}}
+<div class="form-container">
+    <h1 class="form-title">Register</h1>
+    <form action="/user/register" method="post">
+        <div class="mb-3">
+            <label for="input-email" class="form-label">Email address:</label>
+            <input type="email" class="form-control" id="input-email" placeholder="name@example.com" name="email" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="input-phone" class="form-label">Phone:</label>
+            <input type="tel" class="form-control" id="input-phone" placeholder="8884 123 123" name="phone" aria-describedby="phoneHelp">
+        </div>
+        <div class="mb-3">
+            <label for="input-password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="input-password" name="password" aria-describedby="passowrdHelp">
+        </div>
+        <div class="mb-3">
+            <label for="input-confirm-password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="input-confirm-password" name="confirmPassorm" aria-describedby="passwordHelp">
+        </div>
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+</div>
+{{end}}
+
+{{define "js"}}
+
+{{end}}
