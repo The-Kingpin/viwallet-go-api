@@ -5,3 +5,4 @@ ViWallet is a web application that enables you to continently manage your budget
  chmod +x ./run.sh
 
  | Feature | Description | Issue |
+| :---         | :---:    | ---:    |
