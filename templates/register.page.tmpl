@@ -4,9 +4,14 @@
 <div class="form-container">
     <h1 class="form-title">Register</h1>
     <form action="/user/register" novalidate method="post">
+        <input type="hidden" name="csrf_token" value="random">
         <div class="mb-3">
             <label for="input-email" class="form-label">Email address:</label>
             <input type="email" class="form-control" id="input-email" placeholder="name@example.com" name="email" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="input-username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="input-username" placeholder="username" name="username" aria-describedby="usernameHelp">
         </div>
         <div class="mb-3">
             <label for="input-phone" class="form-label">Phone:</label>
@@ -18,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="input-confirm-password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="input-confirm-password" name="confirmPassorm" aria-describedby="passwordHelp">
+            <input type="password" class="form-control" id="input-confirm-password" name="confirm_password" aria-describedby="passwordHelp">
         </div>
         <button type="submit" class="btn btn-success">Register</button>
     </form>
