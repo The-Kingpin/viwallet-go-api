@@ -1,17 +1,37 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+
+	"gitlab.com/code-harbor/viwallet/internal/driver"
+	"gitlab.com/code-harbor/viwallet/internal/handlers"
+	"gitlab.com/code-harbor/viwallet/internal/repository/dbrepo"
 )
 
-// func init() {
-// 	do some initialization here
-// }
+const dbHost string = "localhost"
+const dbPort string = "5432"
+const dbName string = "viwallet"
+const dbUser string = "postgres"
+const dbPassword = "LQIHr6NEvDrY@1cW0hOe1WBEA2G$&2sX"
+const dsnStr = "host=%s port=%s dbname=%s user=%s password=%s"
 
 func main() {
+
+	conn, err := run()
+	if err != nil {
+		// log server error
+		conn.Close()
+		log.Fatal(err)
+	}
+
+	if err != nil {
+		log.Fatal(err)
+	}
 	// get the enviroment type (prod, stg, dev)
 	runtimeSetup := os.Getenv("RUNTIME_SETUP")
 	if runtimeSetup == "" {
@@ -40,12 +60,28 @@ func main() {
 	log.Println("Application running in environment:", runtimeSetup)
 	log.Printf("Starting the application, listening on port %s", serverPort)
 
-	fs := http.FileServer(http.Dir("./static"))
-	http.Handle("/", fs)
-
-	err := http.ListenAndServe(serverPort, nil)
-	if err != nil {
-		log.Fatal(err)
+	srv := &http.Server{
+		Addr:    serverPort,
+		Handler: routes(),
 	}
 
+	err = srv.ListenAndServe()
+
+	log.Fatal(err)
+}
+
+func run() (*sql.DB, error) {
+	var dsn string = fmt.Sprintf(dsnStr, dbHost, dbPort, dbName, dbUser, dbPassword)
+
+	// init db connection
+	dbConn, err := driver.ConnectSQLDatabase(dsn)
+	if err != nil {
+		dbConn.Close()
+		log.Fatal("Server error. Error establishin connection to the database.")
+	}
+
+	repo := dbrepo.NewPostgresRepo(dbConn)
+	handlers.SetDBRepo(repo)
+
+	return dbConn, nil
 }
