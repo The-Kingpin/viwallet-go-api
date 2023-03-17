@@ -17,10 +17,10 @@ func routes() http.Handler {
 
 	mux.Get("/", handlers.Home)
 
-	mux.Get("/user/login", handlers.GetLogin)
+	mux.Get("/user/login", handlers.Login)
 	mux.Post("/user/login", handlers.PostLogin)
 
-	mux.Get("/user/register", handlers.GetRegister)
+	mux.Get("/user/register", handlers.Register)
 	mux.Post("/user/register", handlers.PostRegister)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
