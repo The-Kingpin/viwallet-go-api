@@ -20,6 +20,7 @@ func NewRenderer(a *config.AppConfig) {
 	app = a
 }
 
+// RenderTemplate renders template by given template name. tmpl is name of the desired template to be renderd
 func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string) error {
 	var tc map[string]*template.Template
 
