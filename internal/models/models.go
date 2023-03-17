@@ -11,7 +11,6 @@ type User struct {
 	Password    string
 	PhoneNumber string
 	Photo       string
-	Cards       []Card
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }
