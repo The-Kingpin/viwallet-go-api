@@ -9,7 +9,9 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/justinas/nosurf"
 	"gitlab.com/code-harbor/viwallet/internal/config"
+	"gitlab.com/code-harbor/viwallet/internal/models"
 )
 
 var app *config.AppConfig
@@ -21,7 +23,7 @@ func NewRenderer(a *config.AppConfig) {
 }
 
 // RenderTemplate renders template by given template name. tmpl is name of the desired template to be renderd
-func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string) error {
+func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) error {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -33,15 +35,18 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string) error {
 
 	t, ok := tc[tmpl]
 	if !ok {
+		log.Println(tc)
 		return errors.New("can't get template from cache")
 	}
 
 	buf := new(bytes.Buffer)
+	td = AddDefaultData(td, r)
 
-	err := t.Execute(buf, nil)
+	err := t.Execute(buf, td)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	_, err = buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("Error writing template to browser", err)
@@ -85,4 +90,12 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	}
 
 	return tCache, nil
+}
+
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
+	if app.Session.Exists(r.Context(), "username") {
+		td.IsAuthenticated = true
+	}
+	return td
 }
