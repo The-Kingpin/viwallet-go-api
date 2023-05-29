@@ -4,7 +4,7 @@
 <div class="form-container">
     <h1 class="form-title">Register</h1>
     <form action="/user/register" novalidate method="post">
-        <input type="hidden" name="csrf_token" value="random">
+        <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}">
         <div class="mb-3">
             <label for="input-email" class="form-label">Email address:</label>
             <input type="email" class="form-control" id="input-email" placeholder="name@example.com" name="email" aria-describedby="emailHelp">

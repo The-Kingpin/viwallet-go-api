@@ -1,0 +1,63 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+<div class="form-container">
+    <h6>Transactions</h6>
+    <form method="get">
+        <div style="display:flex; justify-content: space-between">
+            <div style="width: fit-content; display: flex; align-items:center; gap: 8px ">
+                <label for="startDate">From:</label>
+                <input id="startDate" class="form-control" type="date" />
+            </div>
+            <div style="width: fit-content; display: flex; align-items:center; gap: 8px ">
+                <label for="startDate">To:</label>
+                <input id="startDate" class="form-control" type="date" />
+            </div>
+        </div>
+        <div style="margin-top: 8px">
+            <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+        </div>
+        <div style="margin-top: 8px">
+            <button type="submit" class="btn btn-info">Filter</button>
+        </div>
+    </form>
+
+
+</div>
+
+<div style="margin-top: 1.5rem;">
+    <table aria-describedby="show transactions" class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{end}}
+
+{{define "js"}}
+{{end}}
