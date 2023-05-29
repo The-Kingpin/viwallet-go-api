@@ -2,27 +2,15 @@ package dbrepo
 
 import (
 	"context"
-	"database/sql"
 	"errors"
 	"log"
 	"time"
 
 	"gitlab.com/code-harbor/viwallet/internal/models"
-	"gitlab.com/code-harbor/viwallet/internal/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 
-const timeOut time.Duration = 3 * time.Second
-
-type postgresDBRepo struct {
-	DB *sql.DB
-}
-
-func NewPostgresRepo(conn *sql.DB) repository.DatabaseRepository {
-	return &postgresDBRepo{
-		DB: conn,
-	}
-}
+const TimeOut time.Duration = 3 * time.Second
 
 func (pg *postgresDBRepo) GetUserByID(id int) (models.User, error) {
 	var user models.User
@@ -32,7 +20,7 @@ func (pg *postgresDBRepo) GetUserByID(id int) (models.User, error) {
 }
 
 func (pg *postgresDBRepo) CreateUser(user models.User) error {
-	ctx, cancel := context.WithTimeout(context.Background(), timeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), TimeOut)
 	defer cancel()
 	var newId int
 
@@ -66,14 +54,15 @@ func (pg *postgresDBRepo) CreateUser(user models.User) error {
 }
 
 func (pg *postgresDBRepo) AuthenticateUser(email, inputPassword string) (int, string, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), timeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), TimeOut)
 	defer cancel()
 
 	var id int
 	var password string
+	var username string
 
 	// search for existing user with the given email. On success we get hashed password and id from the database
-	err := pg.DB.QueryRowContext(ctx, "select id, password from users where email = $1", email).Scan(&id, &password)
+	err := pg.DB.QueryRowContext(ctx, "select id, password, username from users where email = $1", email).Scan(&id, &password, &username)
 
 	if err != nil {
 		return 0, "", errors.New("wrong credentials")
@@ -85,5 +74,5 @@ func (pg *postgresDBRepo) AuthenticateUser(email, inputPassword string) (int, st
 		return id, "", err
 	}
 
-	return id, email, nil
+	return id, username, nil
 }
