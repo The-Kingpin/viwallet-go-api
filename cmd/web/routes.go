@@ -15,13 +15,17 @@ func routes() http.Handler {
 	mux.Use(CSRFProtect)
 	mux.Use(SessionLoad)
 
-	mux.Get("/", handlers.Home)
+	mux.Get("/", handlers.Repo.Home)
 
-	mux.Get("/user/login", handlers.Login)
-	mux.Post("/user/login", handlers.PostLogin)
+	mux.Get("/user/login", handlers.Repo.Login)
+	mux.Post("/user/login", handlers.Repo.PostLogin)
 
-	mux.Get("/user/register", handlers.Register)
-	mux.Post("/user/register", handlers.PostRegister)
+	mux.Get("/user/register", handlers.Repo.Register)
+	mux.Post("/user/register", handlers.Repo.PostRegister)
+
+	mux.Get("/transactions", handlers.Repo.Trasnsactions)
+	mux.Get("/cards", handlers.Repo.Cards)
+	mux.Get("/wallets", handlers.Repo.Wallets)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
