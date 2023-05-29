@@ -1,0 +1,6 @@
+create_table("wallets") {
+    t.Column("id", "integer", {"primary": true})
+    t.Column("name", "string", {"null": false})
+    t.Column("currency", "string", {})
+    t.Column("balance", "decimal", {})
+}

@@ -1,0 +1,6 @@
+create_table("users_wallets") {
+    t.Column("id", "integer",{})
+    t.Column("user_id", "integer", {"null": false})
+    t.Column("wallet_id", "integer", {"null": false})
+    t.PrimaryKey("user_id", "wallet_id")
+}

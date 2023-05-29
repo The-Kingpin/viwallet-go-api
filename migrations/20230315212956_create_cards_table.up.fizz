@@ -1,0 +1,8 @@
+create_table("cards") {
+    t.Column("id", "integer", {"primary": true})
+    t.Column("card_number", "string",  {"null": false, "size": 16})
+    t.Column("expiration_date", "time", {"null": false})
+    t.Column("names_on_card", "string", {"null": false, "size": 30})
+    t.Column("cvc_number", "string", {"null": false, "size": 3})
+    t.Column("holder_id", "integer", {})
+}

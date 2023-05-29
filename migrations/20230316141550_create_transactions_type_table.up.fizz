@@ -1,0 +1,10 @@
+create_table("transactions_type") {
+    t.Column("id", "integer", {"primary": true})
+    t.Column("type", "string", {"unique": true, "unique":true})
+    t.DisableTimestamps()
+}
+
+sql("insert into transactions_type(type) values
+    ('deposit'),
+    ('withdraw'),
+    ('transfer');")

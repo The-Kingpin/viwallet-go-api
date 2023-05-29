@@ -1,0 +1,9 @@
+create_table("transactions") {
+    t.Column("id", "integer", {"primary": true})
+    t.Column("type", "integer", {})
+    t.Column("sender_id", "integer", {})
+    t.Column("recipient_id", "integer", {})
+    t.Column("reason_for_payment", "string", {})
+    t.Column("amount", "decimal", {})
+    t.Column("currency", "integer", {"null": false})
+}

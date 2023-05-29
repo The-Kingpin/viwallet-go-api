@@ -1,0 +1,6 @@
+create_table("currencies") {
+    t.Column("id", "integer", {"primary": true})
+    t.Column("name", "string", {})
+    t.Column("code", "string", {"size": 3})
+    t.Column("value", "decimal", {})
+}
