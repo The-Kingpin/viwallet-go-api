@@ -9,3 +9,12 @@ services:
       - RUNTIME_SETUP=dev
       - DB_DRIVER=postgres
       - SERVER_HOST=localhost
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: LQIHr6NEvDrY@1cW0hOe1WBEA2G$&2sX
+      user: postgres
