@@ -1,0 +1,20 @@
+build the image:
+docker build -t viwallet .
+
+Run:
+docker run -p 8080:8080 -it viwallet
+
+Run-2:
+docker run --env PORT=8082 -p 8080:8082 -it viwallet
+
+Run-2-detached:
+docker run -d --env PORT=8082 -p 8080:8082 -it viwallet
+
+Run-3-not-detached-dev:
+docker run --env PORT=8082 --env RUNTIME_SETUP=dev -p 8080:8082 -it viwallet
+
+Run-4-detached-dev:
+docker run -d --env PORT=8082 --env RUNTIME_SETUP=dev -p 8080:8082 -it viwallet
+
+Run-3-not-detached-dev-txt:
+docker run --env-file envlist.txt -p 8080:8082 -it viwallet
