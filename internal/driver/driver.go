@@ -10,12 +10,19 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
-const maxOpenDbConn = 10
-const maxIdleDbConn = 5
-const maxDbLifetime = 5 * time.Minute
+// DB holds the database connection pool
+type DB struct {
+	SQL *sql.DB
+}
+
+var dbConn = &DB{}
+
+const MaxOpenDbConn = 10
+const MaxIdleDbConn = 5
+const MaxDbLifetime = 5 * time.Minute
 
 // ConnectSQL establishes database connection
-func ConnectSQLDatabase(dsn string) (*sql.DB, error) {
+func ConnectSQLDatabase(dsn string) (*DB, error) {
 
 	log.Println("Connecting to database...")
 
@@ -24,19 +31,18 @@ func ConnectSQLDatabase(dsn string) (*sql.DB, error) {
 		panic(err)
 	}
 
-	d.SetMaxOpenConns(maxOpenDbConn)
-	d.SetMaxIdleConns(maxIdleDbConn)
-	d.SetConnMaxLifetime(maxDbLifetime)
+	d.SetMaxOpenConns(MaxOpenDbConn)
+	d.SetMaxIdleConns(MaxIdleDbConn)
+	d.SetConnMaxLifetime(MaxDbLifetime)
+
+	dbConn.SQL = d
 
 	err = pingDB(d)
 	if err != nil {
-		d.Close()
 		return nil, err
 	}
 
-	log.Println("Connected to database!")
-
-	return d, nil
+	return dbConn, nil
 }
 
 // newDatabaseConnection opens a new database connection from given dsn- Data Source Name
