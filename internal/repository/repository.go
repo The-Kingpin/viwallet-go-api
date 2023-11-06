@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"gitlab.com/code-harbor/viwallet/internal/models"
+	"gitlab.com/the-kingpin/viwallet/internal/models"
 )
 
 type DatabaseRepository interface {

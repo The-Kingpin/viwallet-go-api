@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"gitlab.com/code-harbor/viwallet/internal/handlers"
+	"gitlab.com/the-kingpin/viwallet/internal/handlers"
 )
 
 func routes() http.Handler {

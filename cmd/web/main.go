@@ -11,11 +11,11 @@ import (
 
 	"github.com/alexedwards/scs/v2"
 
-	"gitlab.com/code-harbor/viwallet/internal/config"
-	"gitlab.com/code-harbor/viwallet/internal/driver"
-	"gitlab.com/code-harbor/viwallet/internal/handlers"
-	"gitlab.com/code-harbor/viwallet/internal/models"
-	"gitlab.com/code-harbor/viwallet/internal/render"
+	"gitlab.com/the-kingpin/viwallet/internal/config"
+	"gitlab.com/the-kingpin/viwallet/internal/driver"
+	"gitlab.com/the-kingpin/viwallet/internal/handlers"
+	"gitlab.com/the-kingpin/viwallet/internal/models"
+	"gitlab.com/the-kingpin/viwallet/internal/render"
 )
 
 var session *scs.SessionManager
@@ -27,7 +27,9 @@ const DbHost string = "localhost"
 const DbPort string = "5432"
 const DbName string = "viwallet"
 const DbUser string = "postgres"
-const DbPassword = "LQIHr6NEvDrY@1cW0hOe1WBEA2G$&2sX"
+const DbPassword = "password"
+
+// const DbPassword = "LQIHr6NEvDrY@1cW0hOe1WBEA2G$&2sX"
 const DSNStr = "host=%s port=%s dbname=%s user=%s password=%s"
 
 func main() {

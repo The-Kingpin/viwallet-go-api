@@ -1,4 +1,4 @@
-module gitlab.com/code-harbor/viwallet
+module gitlab.com/the-kingpin/viwallet
 
 go 1.20
 

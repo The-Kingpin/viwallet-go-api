@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"gitlab.com/code-harbor/viwallet/internal/models"
+	"gitlab.com/the-kingpin/viwallet/internal/models"
 	"golang.org/x/crypto/bcrypt"
 )
 

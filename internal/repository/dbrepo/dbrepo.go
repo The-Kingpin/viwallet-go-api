@@ -3,8 +3,8 @@ package dbrepo
 import (
 	"database/sql"
 
-	"gitlab.com/code-harbor/viwallet/internal/config"
-	"gitlab.com/code-harbor/viwallet/internal/repository"
+	"gitlab.com/the-kingpin/viwallet/internal/config"
+	"gitlab.com/the-kingpin/viwallet/internal/repository"
 )
 
 type postgresDBRepo struct {

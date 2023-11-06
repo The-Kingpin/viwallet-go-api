@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"gitlab.com/code-harbor/viwallet/internal/config"
-	"gitlab.com/code-harbor/viwallet/internal/models"
+	"gitlab.com/the-kingpin/viwallet/internal/config"
+	"gitlab.com/the-kingpin/viwallet/internal/models"
 )
 
 var app *config.AppConfig
